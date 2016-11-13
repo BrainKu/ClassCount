@@ -35,12 +35,13 @@ public class AnimateReAdapter extends RecyclerView.Adapter<AnimateReAdapter.ARVi
             Color.parseColor("#00FFFF"), Color.parseColor("#FFFF00"), Color.parseColor("#FF00FF")};
 
     @Override
-    public void onBindViewHolder(ARViewHolder holder, int position) {
+    public void onBindViewHolder(ARViewHolder holder, final int position) {
         final Object item = mObjects.get(position);
         holder.itemView.setBackgroundColor(colors[position % colors.length]);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
-                Toast.makeText(v.getContext(), "hahahahaa", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "pos" + position, Toast.LENGTH_SHORT).show();
+                TargetFragmentActivity.start(v.getContext(), position);
             }
         });
     }

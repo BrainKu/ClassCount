@@ -30,7 +30,9 @@ public class RecyclerAdapterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_down);
         mRecyclerView = (RecyclerView) findViewById(R.id.add_banner);
-        List<Object> objectList = Arrays.asList(new Object(), new Object(), new Object(), new Object(),
+        List<Object> objectList = Arrays.asList(new Object(), new Object(), new Object(), new Object(),new Object(),
+                new Object(), new Object(), new Object(), new Object(),new Object(),
+                new Object(), new Object(), new Object(), new Object(),new Object(),
                 new Object(), new Object(), new Object(), new Object(), new Object());
         maxPos = objectList.size();
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(this, LinearLayoutManager.VERTICAL, false));
@@ -43,9 +45,9 @@ public class RecyclerAdapterActivity extends AppCompatActivity {
         mHandler.postDelayed(new Runnable() {
             @Override public void run() {
                 mRecyclerView.smoothScrollToPosition(getCurrentPos());
-                mHandler.postDelayed(this, 2000);
+                mHandler.postDelayed(this, 1000);
             }
-        }, 2000);
+        }, 1000);
     }
 
     @Override protected void onDestroy() {

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/outer_layout"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.target23.ku.classcount.TargetFragmentActivity">
+
+    <include layout="@layout/content_target_fragment"/>
+</android.support.design.widget.CoordinatorLayout>
