@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -38,6 +39,7 @@ public class AnimateReAdapter extends RecyclerView.Adapter<AnimateReAdapter.ARVi
     public void onBindViewHolder(ARViewHolder holder, final int position) {
         final Object item = mObjects.get(position);
         holder.itemView.setBackgroundColor(colors[position % colors.length]);
+        holder.tv.setText("current pos:" + position);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 Toast.makeText(v.getContext(), "pos" + position, Toast.LENGTH_SHORT).show();
@@ -47,9 +49,11 @@ public class AnimateReAdapter extends RecyclerView.Adapter<AnimateReAdapter.ARVi
     }
 
     static class ARViewHolder extends RecyclerView.ViewHolder {
+        TextView tv;
 
         public ARViewHolder(View itemView) {
             super(itemView);
+            tv = (TextView) itemView.findViewById(R.id.text);
         }
     }
 

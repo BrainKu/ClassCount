@@ -2,19 +2,16 @@ package com.target23.ku.classcount;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MotionEvent;
-import android.view.TouchDelegate;
 import android.view.View;
+import android.widget.TextView;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class RecyclerAdapterActivity extends AppCompatActivity {
 
@@ -30,13 +27,28 @@ public class RecyclerAdapterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_down);
         mRecyclerView = (RecyclerView) findViewById(R.id.add_banner);
-        List<Object> objectList = Arrays.asList(new Object(), new Object(), new Object(), new Object(),new Object(),
-                new Object(), new Object(), new Object(), new Object(),new Object(),
-                new Object(), new Object(), new Object(), new Object(),new Object(),
+        List<Object> objectList = Arrays.asList(new Object(), new Object(), new Object(), new Object(), new Object(),
+                new Object(), new Object(), new Object(), new Object(), new Object(),
+                new Object(), new Object(), new Object(), new Object(), new Object(),
                 new Object(), new Object(), new Object(), new Object(), new Object());
         maxPos = objectList.size();
         mRecyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(this, LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setAdapter(new AnimateReAdapter(objectList));
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+            @Override public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    View view = recyclerView.getLayoutManager().getChildAt(0); // 明明取的是第一个，但是返回却是不一样的东西。不过似乎可以根据 getTop 的位置来判断是否对齐
+                    if (view != null && view instanceof TextView) {
+                        Log.d("RecyclerAdapterActivity", "view.getTop():" + view.getTop() + ",text:" + ((TextView) view).getText());
+                    }
+                }
+            }
+        });
         mRecyclerView.setOnTouchListener(new View.OnTouchListener() {
             @Override public boolean onTouch(View v, MotionEvent event) {
                 return true;
@@ -45,9 +57,9 @@ public class RecyclerAdapterActivity extends AppCompatActivity {
         mHandler.postDelayed(new Runnable() {
             @Override public void run() {
                 mRecyclerView.smoothScrollToPosition(getCurrentPos());
-                mHandler.postDelayed(this, 1000);
+                mHandler.postDelayed(this, 3000);
             }
-        }, 1000);
+        }, 3000);
     }
 
     @Override protected void onDestroy() {
